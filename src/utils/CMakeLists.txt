@@ -12,6 +12,10 @@ project(${PROJECT_NAME}
 
 # Source files
 set(SOURCE_FILES
+	"include/utils/definitions.h"
+	"include/utils/memleakdetection.h"
+	"src/utils/memleakdetection.cpp"
+	"include/utils/platformdefinitions.h"
 	"include/utils/cmd/command.hpp"
 	"include/utils/cmd/commandhandler.hpp"
 	"include/utils/cmd/error.h"
