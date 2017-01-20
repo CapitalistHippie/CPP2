@@ -7,4 +7,6 @@
 #include <utils/memleakdetection.h>
 #endif // #ifdef UTILS_DEBUG
 
+#include <netw.h>
+
 #endif // #ifndef MACHIAVELLI_MAIN_HEADER_INCLUDED

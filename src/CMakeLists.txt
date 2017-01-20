@@ -18,6 +18,7 @@ project(${PROJECT_NAME} VERSION ${PROJECT_VERSION} LANGUAGES CXX)
 ## 1st party libraries
 #########################################
 add_subdirectory("utils")
+add_subdirectory("netw")
 
 
 #########################################

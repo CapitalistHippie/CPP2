@@ -2,10 +2,10 @@
 
 int main()
 {
-  // Memory leak detection.
+  // Enable memory leak detection if we're in a debug build.
   #ifdef UTILS_DEBUG
   utils::EnableMemoryLeakDetection();
   #endif // #ifdef UTILS_DEBUG
 
-  int* i = new int(272);
+  netw::telnet::Server telnetServer;
 }
