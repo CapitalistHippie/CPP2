@@ -5,8 +5,8 @@
 #include "platformdefinitions.h"
 
 // Debug based on the CMAKE NDEBUG flag.
-#ifndef defined(NDEBUG)
+#ifndef NDEBUG
 #define UTILS_DEBUG
-#endif // #if defined(NDEBUG)
+#endif // #ifndef NDEBUG
 
 #endif // #ifndef UTILS_DEFINITIONS_HEADER_INCLUDED
