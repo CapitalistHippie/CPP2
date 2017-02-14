@@ -38,21 +38,25 @@ int main()
   {
 	  auto errorCode = exception.code();
 
-	  HandleCriticalError("The following critical error occurred: '" + std::to_string(errorCode.value()) + ": " + errorCode.message() + ". " + exception.what() + "'.");
+    HandleCriticalError("The following critical error occurred: '" +
+                        std::to_string(errorCode.value()) + ": " +
+                        errorCode.message() + ". " + exception.what() + "'.");
 
-	  // Return the error code value.
+    // Return the error code value.
 	  return errorCode.value();
   }
   catch (std::exception& exception)
   {
-    HandleCriticalError(std::string("The following critical error occurred: '") + exception.what() + "'.");
+    HandleCriticalError(std::string("The following critical error occurred: '")
+                        + exception.what() + "'.");
 
 	  // Return -1 to indicate an unknown or no error code.
 	  return -1;
   }
   catch (...)
   {
-	  HandleCriticalError("An unknown critical error occurred. The application will now close.");
+	  HandleCriticalError("An unknown critical error occurred. The application
+                        will now close.");
 
 	  // Return -1 to indicate an unknown or no error code.
 	  return -1;
