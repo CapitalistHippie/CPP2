@@ -16,4 +16,7 @@
 
 #include <netw.h>
 
+#include "ui/context.h"
+#include "ui/cnsl/userinterface.h"
+
 #endif // #ifndef MACHIAVELLI_MAIN_HEADER_INCLUDED

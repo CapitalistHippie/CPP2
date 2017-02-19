@@ -93,9 +93,8 @@ namespace cmd
 			catch (std::system_error exception)
 			{
 				errorBuffer = exception.code();
+				return Command();
 			}
-
-			return Command();
 		}
 	}; // class CommandHandler
 } // namespace cmd

@@ -1,18 +1,25 @@
 #ifndef NETW_TELNET_SERVER_HEADER_INCLUDED
 #define NETW_TELNET_SERVER_HEADER_INCLUDED
 
+#include <Socket.h>
+
 #include <utils/noncopyable.h>
 
 namespace netw
 {
 namespace telnet
 {
-  class Server :
-    utils::Noncopyable
-  {
-  public:
+	class Server :
+		utils::Noncopyable
+	{
+	private:
+		ServerSocket socket;
 
-  }; // class Server
+	public:
+		Server(const int port);
+
+		void Accept();
+	}; // class Server
 } // namespace telnet
 } // namespace netw
 

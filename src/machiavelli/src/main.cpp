@@ -2,18 +2,22 @@
 
 int Initialize()
 {
-  // Logging.
+	// Logging.
 
 
-  // Enable memory leak detection if we're in a debug build.
-  #ifdef UTILS_DEBUG
-  utils::EnableMemoryLeakDetection();
-  #endif // #ifdef UTILS_DEBUG
+	// Enable memory leak detection if we're in a debug build.
+	#ifdef UTILS_DEBUG
+	utils::EnableMemoryLeakDetection();
+	#endif // #ifdef UTILS_DEBUG
 
-  netw::telnet::Server telnetServer;
+	netw::telnet::Server telnetServer(1080);
 
-  // Return 0 for no error.
-  return 0;
+	ui::Context userInterfaceContext;
+	ui::cnsl::UserInterface userInterface(userInterfaceContext);
+	userInterface.Start();
+
+	// Return 0 for no error.
+	return 0;
 }
 
 void HandleCriticalError(const std::string& errorMessage)
@@ -25,41 +29,41 @@ void HandleCriticalError(const std::string& errorMessage)
 
 int main()
 {
-  // Top level exception handling but not in debug builds. Makes it harder to
-  // debug.
+	// Top level exception handling but not in debug builds. Makes it harder to
+	// debug.
 #ifndef UTILS_DEBUG
-  try
-  {
+	try
+	{
 #endif // #ifndef UTILS_DEBUG
-    return Initialize();
+		return Initialize();
 #ifndef UTILS_DEBUG
-  }
-  catch (std::system_error& exception)
-  {
-	  auto errorCode = exception.code();
+	}
+	catch (std::system_error& exception)
+	{
+		auto errorCode = exception.code();
 
-    HandleCriticalError("The following critical error occurred: '" +
-                        std::to_string(errorCode.value()) + ": " +
-                        errorCode.message() + ". " + exception.what() + "'.");
+		HandleCriticalError("The following critical error occurred: '" + 
+							std::to_string(errorCode.value()) + ": " +
+                        	errorCode.message() + ". " + exception.what() + "'.");
 
-    // Return the error code value.
-	  return errorCode.value();
-  }
-  catch (std::exception& exception)
-  {
-    HandleCriticalError(std::string("The following critical error occurred: '")
-                        + exception.what() + "'.");
+		// Return the error code value.
+		return errorCode.value();
+	}
+	catch (std::exception& exception)
+	{
+		HandleCriticalError(std::string("The following critical error occurred: '")
+                     	   	+ exception.what() + "'.");
 
-	  // Return -1 to indicate an unknown or no error code.
-	  return -1;
-  }
-  catch (...)
-  {
-	  HandleCriticalError("An unknown critical error occurred. The application
-                        will now close.");
+		// Return -1 to indicate an unknown or no error code.
+		return -1;
+	}
+	catch (...)
+	{
+		HandleCriticalError("An unknown critical error occurred. The application
+							will now close.");
 
-	  // Return -1 to indicate an unknown or no error code.
-	  return -1;
-  }
+		// Return -1 to indicate an unknown or no error code.
+		return -1;
+	}
 #endif // #ifndef UTILS_DEBUG
 }

@@ -30,3 +30,4 @@ target_compile_features(${TARGET_NAME}
 
 # Dependencies
 target_link_libraries(${TARGET_NAME} "utils")
+target_link_libraries(${TARGET_NAME} ${TELNET_LIB_NAME})

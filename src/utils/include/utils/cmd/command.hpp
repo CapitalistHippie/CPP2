@@ -102,7 +102,10 @@ namespace cmd
 
 		// Get the command.
 		std::getline(stream, command.command, ' ');
-		CheckStreamValidity(stream);
+		if (stream.fail())
+			throw std::system_error(utils::cmd::Error::INVALID_ARGUMENT_VALUE);
+		else if (!stream)
+			throw std::system_error(utils::cmd::Error::STREAM_ERROR);
 
 		// Recursively get the parameters.
 		detail::ParseCommandParameters<Parameters...>(stream, command);
