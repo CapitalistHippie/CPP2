@@ -11,6 +11,10 @@ int Initialize()
 	#endif // #ifdef UTILS_DEBUG
 
 	netw::telnet::Server telnetServer(1080);
+	telnetServer.AcceptAsync([](netw::telnet::ServerClient& serverClient)
+	{
+		std::cout << "lmao";
+	});
 
 	ui::Context userInterfaceContext;
 	ui::cnsl::UserInterface userInterface(userInterfaceContext);

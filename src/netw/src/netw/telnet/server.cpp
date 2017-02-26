@@ -6,8 +6,3 @@ Server::Server(const int port) :
     socket(port)
 {
 }
-
-void Server::Accept()
-{
-
-}

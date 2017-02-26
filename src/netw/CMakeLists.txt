@@ -12,8 +12,12 @@ project(${PROJECT_NAME}
 
 # Source files
 set(SOURCE_FILES
+	"include/netw/tcp/server.h"
 	"include/netw/telnet/server.h"
-	"src/netw/telnet/server.cpp")
+	"include/netw/telnet/serverclient.h"
+	"src/netw/tcp/server.cpp"
+	"src/netw/telnet/server.cpp"
+	"src/netw/telnet/serverclient.cpp")
 
 # Binaries
 add_library(${TARGET_NAME} STATIC ${SOURCE_FILES})
