@@ -1,6 +1,8 @@
 #ifndef NETW_TELNET_SERVERCLIENT_HEADER_INCLUDED
 #define NETW_TELNET_SERVERCLIENT_HEADER_INCLUDED
 
+#include <utility>
+
 #include <Socket.h>
 
 #include <utils/noncopyable.h>

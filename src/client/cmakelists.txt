@@ -1,0 +1,39 @@
+cmake_minimum_required(VERSION 3.2)
+
+################################################################################
+## Constants
+################################################################################
+set(MACHIA_CLIENT_PROJECT_NAME		"Client")
+set(MACHIA_CLIENT_PROJECT_VERSION	0.0.1)
+set(MACHIA_CLIENT_TARGET_NAME		"client")
+set(MACHIA_CLIENT_DIR				${CMAKE_CURRENT_LIST_DIR})
+set(MACHIA_CLIENT_SRC_DIR			"${CMAKE_CURRENT_LIST_DIR}/src")
+
+
+################################################################################
+## Project
+################################################################################
+project(${MACHIA_CLIENT_PROJECT_NAME}
+		VERSION ${MACHIA_CLIENT_PROJECT_VERSION}
+		LANGUAGES CXX)
+
+# Source files
+set(MACHIA_CLIENT_SRC_FILES
+	"${MACHIA_CLIENT_SRC_DIR}/ui/cnsl/userinterface.cpp"
+	"${MACHIA_CLIENT_SRC_DIR}/ui/cnsl/userinterface.h"
+	"${MACHIA_CLIENT_SRC_DIR}/ui/base.cpp"
+	"${MACHIA_CLIENT_SRC_DIR}/ui/base.h"
+	"${MACHIA_CLIENT_SRC_DIR}/ui/context.h"
+	"${MACHIA_CLIENT_SRC_DIR}/main.cpp"
+	"${MACHIA_CLIENT_SRC_DIR}/main.h" )
+
+# Binaries
+add_executable(${MACHIA_CLIENT_TARGET_NAME} ${MACHIA_CLIENT_SRC_FILES})
+
+# Enable C++11.
+set_property(TARGET ${MACHIA_CLIENT_TARGET_NAME} PROPERTY CXX_STANDARD 11)
+
+# Dependencies
+target_link_libraries(${MACHIA_CLIENT_TARGET_NAME}
+					  ${MACHIA_UTILS_TARGET_NAME}
+					  ${MACHIA_NETW_TARGET_NAME})

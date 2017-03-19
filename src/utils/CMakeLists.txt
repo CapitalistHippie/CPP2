@@ -1,39 +1,48 @@
 cmake_minimum_required(VERSION 3.2)
 
-# Constants
-set(PROJECT_NAME "Machiavelli utils")
-set(PROJECT_VERSION 0.0.1)
-set(TARGET_NAME "utils")
+################################################################################
+## Constants
+################################################################################
+set(MACHIA_UTILS_PROJECT_NAME		"Utilities")
+set(MACHIA_UTILS_PROJECT_VERSION	0.0.1)
 
-# Project
-project(${PROJECT_NAME}
-	VERSION ${PROJECT_VERSION}
-	LANGUAGES CXX)
+# This variable is set twice because when PARENT_SCOPE is set the variable is
+# not available locally.
+set(MACHIA_UTILS_TARGET_NAME		"utils")
+set(MACHIA_UTILS_TARGET_NAME		"utils" PARENT_SCOPE)
+
+set(MACHIA_UTILS_DIR				${CMAKE_CURRENT_LIST_DIR})
+set(MACHIA_UTILS_SRC_DIR			"${CMAKE_CURRENT_LIST_DIR}/src")
+set(MACHIA_UTILS_INCLUDE_DIR		"${CMAKE_CURRENT_LIST_DIR}/include")
+
+
+################################################################################
+## Project
+################################################################################
+project(${MACHIA_UTILS_PROJECT_NAME}
+		VERSION ${MACHIA_UTILS_PROJECT_VERSION}
+		LANGUAGES CXX)
 
 # Source files
-set(SOURCE_FILES
-	"include/utils/definitions.h"
-	"include/utils/memleakdetection.h"
-	"src/utils/memleakdetection.cpp"
-	"include/utils/noncopyable.h"
-	"include/utils/platformdefinitions.h"
-	"include/utils/cmd/command.hpp"
-	"include/utils/cmd/commandhandler.hpp"
-	"include/utils/cmd/error.h"
-	"include/utils/cmd/errorcategory.h"
-	"src/utils/cmd/errorcategory.cpp")
+set(MACHIA_UTILS_SRC_FILES
+	"${MACHIA_UTILS_INCLUDE_DIR}/utils/cmd/command.hpp"
+	"${MACHIA_UTILS_INCLUDE_DIR}/utils/cmd/commandhandler.hpp"
+	"${MACHIA_UTILS_INCLUDE_DIR}/utils/cmd/error.h"
+	"${MACHIA_UTILS_INCLUDE_DIR}/utils/cmd/errorcategory.h"
+	"${MACHIA_UTILS_INCLUDE_DIR}/utils/definitions.h"
+	"${MACHIA_UTILS_INCLUDE_DIR}/utils/memleakdetection.h"
+	"${MACHIA_UTILS_INCLUDE_DIR}/utils/noncopyable.h"
+	"${MACHIA_UTILS_INCLUDE_DIR}/utils/platformdefinitions.h"
+	"${MACHIA_UTILS_SRC_DIR}/utils/cmd/errorcategory.cpp"
+	"${MACHIA_UTILS_SRC_DIR}/utils/memleakdetection.cpp")
 
 # Binaries
-add_library(${TARGET_NAME} STATIC ${SOURCE_FILES})
+add_library(${MACHIA_UTILS_TARGET_NAME} STATIC
+			${MACHIA_UTILS_SRC_FILES})
 
-# Target properties.
-set_target_properties(${TARGET_NAME} PROPERTIES LINKER_LANGUAGE CXX)
+# Enable C++11.
+set_property(TARGET ${MACHIA_UTILS_TARGET_NAME} PROPERTY CXX_STANDARD 11)
 
 # Include directory
-target_include_directories(${TARGET_NAME} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
-
-# Compiler requirements.
-target_compile_features(${TARGET_NAME}
-	PRIVATE "cxx_range_for")
-
-# Dependencies
+target_include_directories(${MACHIA_UTILS_TARGET_NAME}
+						   PUBLIC ${MACHIA_UTILS_INCLUDE_DIR})

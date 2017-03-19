@@ -1,0 +1,39 @@
+cmake_minimum_required(VERSION 3.2)
+
+################################################################################
+## Constants
+################################################################################
+set(MACHIA_SERVER_PROJECT_NAME		"Server")
+set(MACHIA_SERVER_PROJECT_VERSION	0.0.1)
+set(MACHIA_SERVER_TARGET_NAME		"server")
+set(MACHIA_SERVER_DIR				${CMAKE_CURRENT_LIST_DIR})
+set(MACHIA_SERVER_SRC_DIR			"${CMAKE_CURRENT_LIST_DIR}/src")
+
+
+################################################################################
+## Project
+################################################################################
+project(${MACHIA_SERVER_PROJECT_NAME}
+		VERSION ${MACHIA_SERVER_PROJECT_VERSION}
+		LANGUAGES CXX)
+
+# Source files
+set(MACHIA_SERVER_SRC_FILES
+	"${MACHIA_SERVER_SRC_DIR}/ui/cnsl/userinterface.cpp"
+	"${MACHIA_SERVER_SRC_DIR}/ui/cnsl/userinterface.h"
+	"${MACHIA_SERVER_SRC_DIR}/ui/base.cpp"
+	"${MACHIA_SERVER_SRC_DIR}/ui/base.h"
+	"${MACHIA_SERVER_SRC_DIR}/ui/context.h"
+	"${MACHIA_SERVER_SRC_DIR}/main.cpp"
+	"${MACHIA_SERVER_SRC_DIR}/main.h" )
+
+# Binaries
+add_executable(${MACHIA_SERVER_TARGET_NAME} ${MACHIA_SERVER_SRC_FILES})
+
+# Enable C++11.
+set_property(TARGET ${MACHIA_SERVER_TARGET_NAME} PROPERTY CXX_STANDARD 11)
+
+# Dependencies
+target_link_libraries(${MACHIA_SERVER_TARGET_NAME}
+					  ${MACHIA_UTILS_TARGET_NAME}
+					  ${MACHIA_NETW_TARGET_NAME})
